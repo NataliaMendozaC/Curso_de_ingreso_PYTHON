@@ -6,8 +6,8 @@ import customtkinter
 
 
 '''
-nombre:
-apellido:
+nombre:Natalia
+apellido:Mendoza
 ---
 Ejercicio: entrada_salida_01
 ---
