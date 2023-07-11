@@ -1,3 +1,4 @@
+from msilib.schema import ComboBox
 import tkinter
 from tkinter.messagebox import showinfo as alert
 from tkinter.messagebox import askyesno as question
@@ -24,7 +25,14 @@ class App(customtkinter.CTk):
         
     
     def btn_pedir_clave_on_click(self):
-        pass
+        contraseña_usuario=prompt("A", "Ingrese su contraseña")
+        
+        while contraseña_usuario != "utn750":
+            alert("Error", "Contraseña incorrecta")
+            contraseña_usuario=prompt("B", "Ingrese su contraseña")
+
+
+
     
     
 if __name__ == "__main__":
