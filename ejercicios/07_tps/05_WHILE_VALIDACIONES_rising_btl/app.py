@@ -50,7 +50,18 @@ class App(customtkinter.CTk):
         self.btn_validar.grid(row=4, pady=20, columnspan=2, sticky="nsew")
 
     def btn_validar_on_click(self):
-        pass
+        apellido=self.txt_apellido.get()
+        while apellido==None or apellido=="" or apellido.isdigit():
+            alert("error", "Error: El dato es incorrecto.")
+            break
+        edad=self.txt_edad.get()
+        while (if 18<=edad<=90):
+            alert
+        estado_civil=self.combobox_tipo.get()
+        legajo=self.txt_legajo.get()
+        mensaje=f"Su apellido es {apellido}, tiene {edad} años. Su estado civil es {estado_civil} y legajo {legajo}."
+        alert("hola", mensaje)
+
 
 
 if __name__ == "__main__":

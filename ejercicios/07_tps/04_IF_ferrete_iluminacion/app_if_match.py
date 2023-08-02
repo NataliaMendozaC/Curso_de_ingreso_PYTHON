@@ -8,11 +8,11 @@ import customtkinter
 Nombre:Natalia
 Apellido:Mendoza
 Todas las lámparas están  al mismo precio de $800 pesos final.
-		LISTO A.	Si compra 6 o más  lamparitas bajo consumo tiene un descuento del 50%. 
-		LISTO B.	Si compra 5  lamparitas bajo consumo marca "ArgentinaLuz" se hace un descuento del 40 % y si es de otra marca el descuento es del 30%.
-		LISTORTI C.	Si compra 4  lamparitas bajo consumo marca "ArgentinaLuz" o “FelipeLamparas” se hace un descuento del 25 % y si es de otra marca el descuento es del 20%.
-		D.	Si compra 3  lamparitas bajo consumo marca "ArgentinaLuz"  el descuento es del 15%, si es  “FelipeLamparas” se hace un descuento del 10 % y si es de otra marca un 5%.
-		E.	Si el importe final con descuento suma más de $4000  se obtien un descuento adicional de 5%.
+	     A.	Si compra 6 o más  lamparitas bajo consumo tiene un descuento del 50%. 
+	     B.	Si compra 5  lamparitas bajo consumo marca "ArgentinaLuz" se hace un descuento del 40 % y si es de otra marca el descuento es del 30%.
+	     C.	Si compra 4  lamparitas bajo consumo marca "ArgentinaLuz" o “FelipeLamparas” se hace un descuento del 25 % y si es de otra marca el descuento es del 20%.
+	     D.	Si compra 3  lamparitas bajo consumo marca "ArgentinaLuz"  el descuento es del 15%, si es  “FelipeLamparas” se hace un descuento del 10 % y si es de otra marca un 5%.
+		 E.	Si el importe final con descuento suma más de $4000  se obtien un descuento adicional de 5%.
 '''
 
 class App(customtkinter.CTk):
@@ -49,22 +49,25 @@ class App(customtkinter.CTk):
         if cantidad>=6:
             descuento=50
         elif cantidad==5:
-            if marca=="ArgentinaLuz":
-                descuento=40
-            else:
-                descuento=30
+            match marca:
+                case "ArgentinaLuz":
+                 descuento=40
+                case _:
+                 descuento=30
         elif cantidad==4:
-            if marca=="FelipeLamparas" or marca=="ArgentinaLuz":
-                descuento=25
-            else:
-                descuento=20
+            match marca:
+                case "FelipeLamparas"|"ArgentinaLuz":
+                     descuento=25
+                case _:
+                     descuento=20              
         elif cantidad==3:
-            if marca=="ArgentinaLuz":
-                descuento=15
-            elif marca=="FelipeLamparas":
-                descuento=10
-            else:
-                descuento=5    
+            match marca:
+                case "ArgentinaLuz":
+                     descuento=15
+                case "FelipeLamparas":
+                    descuento=10
+                case _:
+                    descuento=5       
 
         total=precio_lampara*cantidad
         descuento_cuenta=total*descuento/100

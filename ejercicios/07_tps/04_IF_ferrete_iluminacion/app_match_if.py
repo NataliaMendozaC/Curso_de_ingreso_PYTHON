@@ -46,25 +46,26 @@ class App(customtkinter.CTk):
         descuento=int(0)
         mensaje=""
 
-        if cantidad>=6:
-            descuento=50
-        elif cantidad==5:
-            if marca=="ArgentinaLuz":
-                descuento=40
-            else:
-                descuento=30
-        elif cantidad==4:
-            if marca=="FelipeLamparas" or marca=="ArgentinaLuz":
-                descuento=25
-            else:
-                descuento=20
-        elif cantidad==3:
-            if marca=="ArgentinaLuz":
-                descuento=15
-            elif marca=="FelipeLamparas":
-                descuento=10
-            else:
-                descuento=5    
+        match cantidad:
+            case 6|7|8|9|10|11|12:
+                descuento=50
+            case 5:
+                if marca=="ArgentinaLuz":
+                    descuento=40
+                else:
+                    descuento=30
+            case 4:
+                if marca=="FelipeLamparas" or marca=="ArgentinaLuz":
+                 descuento=25
+                else:
+                 descuento=20
+            case 3:
+                if marca=="ArgentinaLuz":
+                 descuento=15
+                elif marca=="FelipeLamparas":
+                 descuento=10
+                else:
+                 descuento=5 
 
         total=precio_lampara*cantidad
         descuento_cuenta=total*descuento/100

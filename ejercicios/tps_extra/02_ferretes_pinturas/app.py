@@ -44,13 +44,12 @@ class App(customtkinter.CTk):
         self.btn_convertir_f_c.grid(row=4, pady=10, columnspan=2, sticky="nsew")
     
     def btn_convertir_c_f_on_click(self):
-        alert("Hola", "Holaa")
+        pass
 
     def btn_convertir_f_c_on_click(self):
-        pass 
+        pass
     
     
 if __name__ == "__main__":
     app = App()
     app.mainloop()
-    

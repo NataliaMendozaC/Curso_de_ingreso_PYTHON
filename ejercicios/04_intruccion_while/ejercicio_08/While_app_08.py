@@ -32,7 +32,8 @@ class App(customtkinter.CTk):
 
 
     def btn_comenzar_ingreso_on_click(self):
-        pass
+        acumulador=0
+        numero_ingresado=int(prompt("", "Quieres ingresar otro número?"))
 
     
 if __name__ == "__main__":

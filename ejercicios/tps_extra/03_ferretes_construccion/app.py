@@ -55,7 +55,8 @@ class App(customtkinter.CTk):
         self.label_2.grid(row=1, column=0, padx=20, pady=10)
         
         self.txt_ancho = customtkinter.CTkEntry(master=self)
-        self.txt_ancho.grid(row=1, column=1)      
+        self.txt_ancho.grid(row=1, column=1)
+       
         self.btn_calcular = customtkinter.CTkButton(master=self, text="CALCULAR", command=self.btn_calcular_on_click)
         self.btn_calcular.grid(row=3, pady=10, columnspan=2, sticky="nsew")
         

@@ -24,7 +24,11 @@ class App(customtkinter.CTk):
 
 
     def btn_calcular_on_click(self):
-        pass
+        acumulador=0
+        for numero in self.lista_datos:
+            acumulador += numero
+
+        alert(f"La sema total es: {acumulador}")
     
 if __name__ == "__main__":
     app = App()
