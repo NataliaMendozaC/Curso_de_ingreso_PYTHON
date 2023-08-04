@@ -54,15 +54,9 @@ class App(customtkinter.CTk):
         while apellido==None or apellido=="" or apellido.isdigit():
             alert("error", "Error: El dato es incorrecto.")
             break
+
         edad=self.txt_edad.get()
-        while (if 18<=edad<=90):
-            alert
-        estado_civil=self.combobox_tipo.get()
-        legajo=self.txt_legajo.get()
-        mensaje=f"Su apellido es {apellido}, tiene {edad} años. Su estado civil es {estado_civil} y legajo {legajo}."
-        alert("hola", mensaje)
-
-
+        while (edad>=18 and edad<=90) or edad.isdigit() :
 
 if __name__ == "__main__":
     app = App()

@@ -22,7 +22,14 @@ class App(customtkinter.CTk):
 
 
     def btn_mostrar_on_click(self):
-        pass
+        numero_ingresado=int(prompt("","Ingrese un número:"))
+        contador=0
+
+        for divisor in range(1, numero_ingresado,+1):
+            if numero_ingresado%divisor==0:
+                alert("",f"Número divisor de {numero_ingresado}: {divisor}")
+
+
         
     
 if __name__ == "__main__":

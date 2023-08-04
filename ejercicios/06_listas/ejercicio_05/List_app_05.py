@@ -28,7 +28,7 @@ class App(customtkinter.CTk):
         for numero in self.lista_datos:
             acumulador += numero
 
-        alert(f"La sema total es: {acumulador}")
+        alert("",f"La sema total es: {acumulador}")
     
 if __name__ == "__main__":
     app = App()

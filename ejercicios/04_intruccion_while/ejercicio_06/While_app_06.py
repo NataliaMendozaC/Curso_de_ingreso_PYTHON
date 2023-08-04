@@ -39,7 +39,7 @@ class App(customtkinter.CTk):
         self.txt_suma_acumulada.delete(0,"end")
 
         while contador<5:
-            numero_ingresado=int(prompt("Ingrese un número:"))
+            numero_ingresado=int(prompt("","Ingrese un número:"))
             acumulador+=numero_ingresado
             contador+=1
 

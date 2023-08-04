@@ -23,9 +23,12 @@ class App(customtkinter.CTk):
 
 
     def btn_mostrar_on_click(self):
-        pass 
-       
-            
+        contador=0
+        for numero in range(5):
+            contador+=1
+            alert("",f"Vuelta {contador}")
+
+
 
 if __name__ == "__main__":
     app = App()

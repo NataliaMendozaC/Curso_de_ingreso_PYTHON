@@ -37,7 +37,7 @@ class App(customtkinter.CTk):
         
         self.txt_importe_3 = customtkinter.CTkEntry(master=self)
         self.txt_importe_3.grid(row=2, column=1)
-       
+
         self.btn_total = customtkinter.CTkButton(master=self, text="TOTAL", command=self.btn_total_on_click)
         self.btn_total.grid(row=3, pady=10, columnspan=2, sticky="nsew")
         
@@ -47,6 +47,10 @@ class App(customtkinter.CTk):
         self.btn_total_iva = customtkinter.CTkButton(master=self, text="TOTAL c/IVA", command=self.btn_total_iva_on_click)
         self.btn_total_iva.grid(row=5, pady=10, columnspan=2, sticky="nsew")
 
+        importe_uno=int(self.txt_importe_1.get())
+        importe_dos=int(self.txt_importe_2.get())
+        importe_tres=int(self.txt_importe_3.get())
+
     def btn_total_on_click(self):
         pass
 
@@ -54,7 +58,7 @@ class App(customtkinter.CTk):
         pass
 
     def btn_total_iva_on_click(self):
-        pass      
+        pass    
     
 if __name__ == "__main__":
     app = App()

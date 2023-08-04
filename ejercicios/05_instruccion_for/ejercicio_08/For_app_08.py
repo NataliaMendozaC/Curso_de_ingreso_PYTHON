@@ -21,7 +21,11 @@ class App(customtkinter.CTk):
 
 
     def btn_mostrar_on_click(self):
-        pass
+        numero_ingresado=int(prompt("","Ingrese un número"))
+
+        for divisor in range(2, numero_ingresado):
+            if numero_ingresado % divisor == 0:
+                alert("", f"{numero_ingresado} es primo")
     
 if __name__ == "__main__":
     app = App()

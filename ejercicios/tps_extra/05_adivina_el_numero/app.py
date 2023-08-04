@@ -10,7 +10,7 @@ import random
 Adivina el número (v 1.0):
 Al comenzar el juego generamos un número secreto del 1 al 100, en la pantalla del juego dispondremos de un cuadro de texto 
 para ingresar un número y un botón “Verificar”, si el número ingresado es el mismo que el número secreto se dará por terminado
- el juego con un mensaje similar a este: 
+el juego con un mensaje similar a este: 
 
 “Ganaste en X intentos”.
 de no ser igual se debe informar si 
@@ -34,11 +34,22 @@ class App(customtkinter.CTk):
 
         self.numero_secreto = random.randrange(1, 100)
         self.numero_intento = 0
+        print(self.numero_secreto)
 
 
     def btn_mostrar_on_click(self):
-        pass
+        self.numero_intento=self.numero_intento+1
+        numero_jugador=self.numero_secreto.get()
+        num_jugador=int(numero_jugador)
 
+        if num_jugador==self.numero_secreto:
+            mensaje=f"Ganaste en {self.numero_intento} intentos."
+        elif num_jugador>self.numero_secreto:
+            mensaje="Se pasó del num secreto"
+        else:
+            mensaje="Falta para llegar al num secreto"
+
+        alert("",mensaje)
 
 if __name__ == "__main__":
     app = App() 
