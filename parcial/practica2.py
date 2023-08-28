@@ -1,5 +1,5 @@
 # PRACTICAR
-# 0,2,7,9,verificación
+# 0,1,3,4,9,validación
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
@@ -29,11 +29,11 @@ NOMBRE = 'Nata' # Completa tu nombre completo solo en esa variable
 """
 A) Deberemos desarrollar un sistema para que el dueño pueda ingresar la siguiente información hasta que el decida.
 
-    * (VALIDAR) Nombre de la carta: No puede estar vacio.
-    * (VALIDAR) Tipo de carta: "Monstruo", "Magica", "Trampa".
-    * (VALIDAR) Tipo de transacción: "Compra", "Venta".
-    * (VALIDAR) Rareza: Que sea "Rara", "Super Rara", "Ultra Rara".
-    * (VALIDAR) Precio: Que no sea 0 o negativo.
+    #* (VALIDAR) Nombre de la carta: No puede estar vacio.
+    #* (VALIDAR) Tipo de carta: "Monstruo", "Magica", "Trampa".
+    #* (VALIDAR) Tipo de transacción: "Compra", "Venta".
+    #* (VALIDAR) Rareza: Que sea "Rara", "Super Rara", "Ultra Rara".
+    #* (VALIDAR) Precio: Que no sea 0 o negativo.
 
 B)
     Al presionar el boton mostrar se deberan listar todas las cartas con la siguiente información:
@@ -107,129 +107,80 @@ class App(customtkinter.CTk):
         
 
     def btn_mostrar_todos_on_click(self):
-        largo_lista=len(self.nombre_carta)
-        for i in range (largo_lista):
-            print(f"""Nombre de la carta: {self.nombre_carta[i]}. Tipo de carta: {self.tipo_carta[i]}
-            Tipo de transacción: {self.tipo_transaccion[i]}. Rareza: {self.rareza_carta[i]}. Precio: {self.precio_carta[i]}
-            """)
+        #mostrar 
+        #! 4) - Nombre y tipo de la carta que se compró con la rareza Ultra rara del costo mas elevado.
+        indice_carta_mas_cara = None
+        indice_carta_menos_cara = None
+        maximo = None
+        minimo = None
+        bandera_carta_mas_cara=False
+
+        for i in range(len(self.nombre_carta)):
+            if self.tipo_transaccion[i] == "compra":
+                if self.rareza_carta[i] == "Ultra Rara":
+                    if bandera_carta_mas_cara == False:
+                        maximo = self.precio_carta[i]
+                        minimo = self.precio_carta[i]
+                        indice_carta_mas_cara = i
+                        indice_carta_menos_cara = i
+                        bandera_carta_mas_cara = True
+                    else:
+                        if self.precio_carta[i] > maximo:
+                            maximo = self.precio_carta[i]
+                            indice_carta_mas_cara = i
+                        if self.precio_carta[i] < minimo:
+                            minimo = self.precio_carta[i]
+                            indice_carta_menos_cara = i
+
+        print(f"La carta más cara es {self.nombre_carta[indice_carta_mas_cara]} con un valor de {maximo} y el tipo de carta es {self.tipo_carta[indice_carta_mas_cara]}")
+        print(f"La carta más barata es {self.nombre_carta[indice_carta_menos_cara]} con un valor de {minimo} y el tipo de carta es {self.tipo_carta[indice_carta_menos_cara]}")
+
 
     def btn_mostrar_informe_1(self):
-        #! 2) - Tipo de los cartas mas cartas posea. 
-        contador_trampa=0
-        contador_magica=0
-        contador_monstruo=0
+        #! 1) - Rareza de las cartas que menos cartas posea.
+        contador_rara=0
+        contador_ultra_rara=0
+        contador_super_rara=0
 
-        match self.tipo_carta:
-            case "Monstruo":
-                contador_monstruo+=1
-            case "Trampa":
-                contador_trampa+=1
+        match self.rareza_carta:
+            case "Rara":
+                contador_rara+=1
+            case "Super Rara":
+                contador_super_rara+=1
             case _:
-                contador_magica+=1
+                contador_ultra_rara+=1
 
-        if contador_monstruo>contador_magica and contador_monstruo>contador_trampa:
-            tipo_mas_posee="Montruo"
-        elif contador_magica>contador_trampa:
-            tipo_mas_posee="Magica"
+        if contador_rara<contador_super_rara and contador_rara<contador_ultra_rara:
+            tipo_menos_posee="Rara"
+        elif contador_super_rara<contador_ultra_rara:
+            tipo_menos_posee="Super Rara"
         else:
-            tipo_mas_posee="Trampa"
+            tipo_menos_posee="Trampa"
 
-        print(f"El tipo de cartas que más posee es {tipo_mas_posee}.")
-
-
+        print(f"El tipo de cartas que menos posee es {tipo_menos_posee}.")
     def btn_mostrar_informe_2(self):
+        pass
+        #! 3) - Porcentaje de cartas de rareza Ultra Rara de tipo mounstro (Sobre el total de cartas ingresadas).
+        largo_lista=len(self.nombre_carta)
+        contador_ur_monstruo=0
+        for i in range(largo_lista):
+            if self.rareza_carta[i]=="Ultra Rara" and self.tipo_carta[i]=="Monstruo":
+                    contador_ur_monstruo+=1
+        porcentaje_ur_monstruo=contador_ur_monstruo/largo_lista*100
+        print(f"El porcentaje de cartas UR tipo monstruo sobre el total es {porcentaje_ur_monstruo}")
+    def btn_mostrar_informe_3(self):
+        pass
         #! 0) - Cantidad de Cartas que se compraron de tipo Magica cuya rareza sea Ultra Rara y no hayan salido mas de 200 USD 
         #(Agregar aumento de 10% para contemplar compras). 
         #(Agregar los nombres y precios de dichas cartas a las listas nuevas correspondientes)
         #! 9) - De las listas (realizada en el informe 0) averiguar, cual es la mas cara de estas y luego contar la cantidad que sean para mostrar un mensaje que sea.
-        lista_nombre=[]
-        lista_precios=[]
-        contador_carta_magica_ur_menor_200=0
-        largo_lista=len(self.nombre_carta)
-        bandera_carta_mas_cara=False
-
-        for i in range(largo_lista):
-            if self.tipo_transaccion[i]=="compra":
-                if self.tipo_carta[i]=="Magica":
-                    if self.rareza_carta[i]=="Ultra Rara":
-                        if self.precio_carta[i]*1.10<=200:
-                            contador_carta_magica_ur_menor_200+=1
-                            lista_nombre.append(self.nombre_carta[i])
-                            lista_precios.append(self.precio_carta[i])
-
-        print(f"La cantidad de cartas que se compraron tipo Magica UR con precio menor a $200 es: {contador_carta_magica_ur_menor_200}")
-        #for i in range (len(lista_nombre)):
-            #print(f"Una de las cartas que tiene estas características es: {lista_nombre[i]} con un valor de {lista_precios[i]}")
-        indice_carta_mas_cara = None
-        indice_carta_menos_cara = None
-        for i in range (len(lista_nombre)):
-            print(f"Una de las cartas que tiene estas características es: {lista_nombre[i]} con un valor de {lista_precios[i]}")
-            if bandera_carta_mas_cara==False:
-                maximo=lista_precios[i]
-                minimo=lista_precios[i]
-                indice_carta_mas_cara = i
-                indice_carta_menos_cara = i
-                bandera_carta_mas_cara=True
-            else:
-                if lista_precios[i]>maximo:
-                    maximo=lista_precios[i]
-                    indice_carta_mas_cara = i
-                if lista_precios[i]<minimo:
-                    minimo=lista_precios[i]
-                    indice_carta_menos_cara = i
-            #print(f"La carta más cara es {lista_nombre[i]} con un valor de {maximo[i]}")
-        print(f"La carta más cara es {lista_nombre[indice_carta_mas_cara]} con un valor de {maximo}")
-        print(f"La carta más barata es {lista_nombre[indice_carta_menos_cara]} con un valor de {minimo}")
-
-        
-
-
-
-    def btn_mostrar_informe_3(self):
-        #! 7) - Cantidad de Cartas que se vendieron de tipo trampa cuya rareza sea rara y se hayan vendido entre al menos los 100 y 300 dolares
-        #(Contemplar el 10% de descuento por comisión de ventas).
-        contador_carta_trampa_r_entre_100_300=0
-        for i in range (len(self.nombre_carta)):
-            if self.tipo_transaccion[i]=="venta":
-                if self.tipo_carta[i]=="Trampa":
-                    if self.rareza_carta[i]=="Rara":
-                        if self.precio_carta[i]*0.90>=100 and self.precio_carta[i]*0.90<=300:
-                            contador_carta_trampa_r_entre_100_300+=1
-
-        print(f"La cantidad de cartas que se vendieron tipo trampa rara entre $100 y $300 es: {contador_carta_trampa_r_entre_100_300}")
-
-
     def btn_cargar_cartas_on_click(self):
-        while True:
-
-            nombre_de_carta=prompt("NOMBRE", "Ingrese el nombre de la carta:")
-            if nombre_de_carta=="":
-                nombre_de_carta=prompt("ERROR", "Reingrese el nombre de la carta:")
-            self.nombre_carta.append(nombre_de_carta)
-
-            tipo_de_carta=prompt("TIPO", "Ingrese un tipo de carta:")
-            while (tipo_de_carta != "Monstruo" and tipo_de_carta != "Magica" and  tipo_de_carta != "Trampa"):
-                tipo_de_carta=prompt("ERROR", "Reingrese un tipo de carta:")
-            self.tipo_carta.append(tipo_de_carta)
-
-            tipo_de_transaccion=prompt("TRANSACCION", "Ingrese un tipo de transacción:")
-            while (tipo_de_transaccion != "venta" and tipo_de_transaccion != "compra"):
-                tipo_de_transaccion=prompt("ERROR", "Reingrese un tipo de transacción:")
-            self.tipo_transaccion.append(tipo_de_transaccion)
-
-            tipo_de_rareza=prompt("RAREZA", "Ingrese un tipo de rareza:")
-            while (tipo_de_rareza != "Rara" and tipo_de_rareza != "Super Rara" and  tipo_de_rareza != "Ultra Rara"):
-                tipo_de_carta=prompt("ERROR", "Reingrese un tipo de rareza:")
-            self.rareza_carta.append(tipo_de_rareza)
-
-            precio_de_carta=prompt("PRECIO","Ingrese el precio de la carta:")
-            while int(precio_de_carta)<=0:
-                precio_de_carta=prompt("ERROR","Reingrese el precio de la carta:")
-            self.precio_carta.append(precio_de_carta)
-
-            pregunta=question("DATOS", "Desea cargar otra carta?")
-            if pregunta==False:
-                break
+        pass
+        #* (VALIDAR) Nombre de la carta: No puede estar vacio.
+        #* (VALIDAR) Tipo de carta: "Monstruo", "Magica", "Trampa".
+        #* (VALIDAR) Tipo de transacción: "Compra", "Venta".
+        #* (VALIDAR) Rareza: Que sea "Rara", "Super Rara", "Ultra Rara".
+        #* (VALIDAR) Precio: Que no sea 0 o negativo.
 
 
 if __name__ == "__main__":

@@ -128,6 +128,9 @@ class App(customtkinter.CTk):
         contador_magica=0
         contador_cartas_generales=0 
         contador_ur_monstruo=0
+        contador_carta_monstruo_r_menor_50=0
+        acumulador_valores_cartas=0
+        lista_cartas_mayor_al_promedio=[]
         lista_precio_carta_ur=[]
         lista_nombre_carta_ur=[]
 
@@ -193,8 +196,35 @@ class App(customtkinter.CTk):
                 for i in range (len(lista_nombre_carta_ur)):
                     if bandera_segundo==None or self.precio_carta[i]>self.precio_carta[bandera_segundo]:
                         bandera_segundo=i
-        #! 5) - Porcentaje de cartas de tipo mounstro con rareza rara que haya salido igual o menor USD 50 (sobre el total de cartas ingresadas).
-        
+        print(f"El nombre: {self.nombre_carta[bandera_segundo]} y el tipo es: {self.tipo_carta[bandera_segundo]}")
+        #! 5) - Porcentaje de cartas de tipo monstruo con rareza rara que haya salido igual o menor USD 50 (sobre el total de cartas ingresadas).
+        if self.tipo_carta=="Monstruo":
+            if self.rareza_carta=="Rara":
+                if self.precio_carta<=50:
+                    contador_carta_monstruo_r_menor_50+=1
+
+        porcentaje_rara_monstruo=contador_carta_monstruo_r_menor_50/largo_lista*100
+        #! 6) - Listado de todas las cartas cuyo poder de valor de compra supere el valor promedio.
+        promedio_cartas_sobre_precio=acumulador_valores_cartas/largo_lista
+        if self.tipo_transaccion=="compra":
+            acumulador_valores_cartas+=self.precio_carta[i]
+        for i in range (largo_lista):
+            if self.precio_carta[i]>promedio_cartas_sobre_precio:
+                lista_cartas_mayor_al_promedio.append(self.nombre_carta[i])
+        #! 7) - Cantidad de Cartas que se vendieron de tipo trampa cuya rareza sea rara y se hayan vendido entre al menos los 100 y 300 dolares
+        #(Contemplar el 10% de descuento por comisión de ventas).
+        if self.tipo_transaccion[i]=="venta":
+            if self.tipo_carta[i]=="Trampa":
+                if self.rareza_carta[i]=="Rara":
+                    if self.precio_carta[i]*0.90>=100 and self.precio_carta[i]*0.90<=300:
+                        contador_cartas_trampa_rara_100y300+=1
+        #! 8) - Nombre y tipo de la carta que se vendió con la rareza Super Rara del costo mas bajo.
+        bandera_tercero=None
+        if self.rareza_carta[i]=="Super Rara":
+            if self.tipo_transaccion[i]=="venta":
+                    if bandera_tercero==None or self.precio_carta[i]<self.precio_carta[bandera_tercero]:
+                        bandera_tercero=i
+        print(f"El nombre: {self.nombre_carta[bandera_tercero]} y el tipo es: {self.tipo_carta[bandera_tercero]}")
 
 
 
